@@ -4,28 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/notify.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/notify.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="content">
         <div id="chat">
             <div id="chat-header">
-                Nickname: <span id="nickname"></span>
+                Nickname: <span id="nickname"><%= nickname %></span>
             </div>
-            <div id="chat-content">  
+            <div id="chat-content">
             </div>
             <div id="chat-footer">
                 <div id="container-footer">
-                    <input type="text" id="input-message" placeholder="Write a message">
-                    <button type="button" id="send" class="button-primary-no-radius">Send</button>
+                    <form id="form-message">
+                        <input type="text" id="input-message" placeholder="Write a message">
+                        <button type="submit" class="button-primary-no-radius">Send</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 <script src="/socket.io/socket.io.js"></script>
-<script type="module" src="js/chat.js"></script>
-<script type="module" src="js/notify.js"></script>
+<script type="module" src="/js/chat.js"></script>
+<script type="module" src="/js/notify.js"></script>
 </body>
 </html>

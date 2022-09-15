@@ -1,62 +1,70 @@
-document.addEventListener("DOMContentLoaded", function() 
-{   
-    var url_string = window.location.href;
-    var url = new URL(url_string);
-    var nickname = url.searchParams.get("nickname");
+document.addEventListener("DOMContentLoaded", function () {
+    const form_message = document.querySelector("#form-message");
+    const input_message = form_message.querySelector("#input-message");
+    const nickname = document.querySelector("#nickname").innerText;
 
-    if(nickname === "" || nickname === null)
-    {
-        window.location.replace("http://localhost:3000/");
-    }
-    else
-    {
-        document.getElementById("nickname").innerText = nickname;
+    const socket = create_socket(nickname);
 
-        const socket = io("http://localhost:3000/");
+    form_message.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-        socket.on("user-connected", (user) => 
-        {
-            append_message(user + " is connected...");
-        });
+        let message = input_message.value;
 
-        document.getElementById("send").addEventListener("click", function()
-        {
-            var text = document.getElementById("input-message").value;
+        if (message.trim()) {
+            append_message({message: message}, true);
 
-            if(text.trim() !== "") 
-            {
-                append_message("You: " + text);
+            socket.emit("send-message", { nickname: nickname, message: message });
 
-                socket.emit("send-message", {user: nickname, message: text});
+            input_message.value = "";
+        }
+    });
 
-                document.getElementById("input-message").value = "";
-            }
-        });
-
-        socket.on("received-message", (data) => 
-        {
-            var message = data.user + ": " + data.message;
-
-            append_message(message);
-        });
-
-        socket.on("user-disconnected", (data) => 
-        {
-            var message = data + " disconnected...";
-
-            append_message(message);
-        });
-    }
+    window.addEventListener("beforeunload", () => {
+        socket.emit("user-disconnected");
+    });
 });
 
-function append_message(data, self_message)
-{
-    var content = document.getElementById("chat-content");
+function create_socket(nickname) {
+    const socket = io();
 
-    if(self_message)
-        content.innerHTML += `<div class="wrap-message"><div class="message">${data}</div></div>`;
+    socket.emit("user-connected", { nickname: nickname });
+
+    socket.on("user-connected", (nickname) => {
+        append_message_hint(nickname + " is connected.");
+    });
+
+    socket.on("received-message", (data) => {
+        append_message(data, false);
+    });
+
+    socket.on("user-disconnected", (nickname) => {
+        append_message_hint(nickname + " is disconnected.");
+    });
+
+    return socket;
+}
+
+function append_message(data, self_message) {
+    const content = document.querySelector("#chat-content");
+
+    if (self_message)
+        content.innerHTML += `<div class="wrap-message"><div class="self-message">${data.message}</div></div>`;
     else
-        content.innerHTML += `<div class="wrap-message"><div class="self-message">${data}</div></div>`;
+        content.innerHTML += `<div class="wrap-message">
+                                <div class="other-message">
+                                <small>${data.nickname}</small>
+                                    ${data.message}
+                                </div>
+                            </div>`;
 }
 
 
+function append_message_hint(message) {
+    const content = document.querySelector("#chat-content");
+
+    content.innerHTML += `<div class="wrap-message">
+                            <div class="message-hint">
+                                ${message}
+                            </div>
+                        </div>`
+}

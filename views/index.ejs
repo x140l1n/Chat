@@ -4,25 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/notify.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/notify.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="content">
-        <form id="form" action="chat">
-            <div id="noti"></div>
-            <div id="form-container">
-                <h1 id="form-header">Chat test</h1>
-                <br/>
+        <div class="noti" id="noti"></div>
+        <div id="form-container">
+            <form id="form">
+                <h2 id="form-header">Chat with Node.JS and Socket.IO</h2>
                 <input class="form-text" id="nickname" name="nickname" type="text" placeholder="Nickname"/>
-                <br/>
-                <button type="button" class="button-success" id="button-go">Go</button>
-            </div>
-        </form>
+                <button type="submit" class="button-success">Go</button>
+            </form>
+        </div>
     </div>
 <script src="/socket.io/socket.io.js"></script>
-<script type="module" src="js/start.js"></script>
-<script type="module" src="js/notify.js"></script>
+<script type="module" src="/js/start.js"></script>
+<script type="module" src="/js/notify.js"></script>
 </body>
 </html>
