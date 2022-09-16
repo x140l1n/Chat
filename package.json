@@ -4,15 +4,15 @@
   "description": "Chat",
   "main": "index.js",
   "dependencies": {
+    "dotenv": "^16.0.2",
     "ejs": "^3.1.3",
     "express": "^4.17.1",
+    "moment": "^2.29.4",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0"
   },
-  "devDependencies": {},
   "scripts": {
-    "start": "node index",
-    "watch": "node index --watch"
+    "start": "node index"
   },
   "author": "Xiaolin Ji  Lin",
   "license": "ISC"
