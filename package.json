@@ -14,7 +14,7 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon index",
-    "build": ""
+    "build": "heroku create && git push heroku master"
   },
   "author": "Xiaolin Jin Lin",
   "license": "ISC"
