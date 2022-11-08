@@ -13,7 +13,8 @@
   },
   "scripts": {
     "start": "node index",
-    "dev": "nodemon index"
+    "dev": "nodemon index",
+    "build": ""
   },
   "author": "Xiaolin Jin Lin",
   "license": "ISC"
