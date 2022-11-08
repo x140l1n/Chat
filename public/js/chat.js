@@ -89,7 +89,7 @@
         {
             const now = new Date();
 
-            content_messages.innerHTML += `<div class="wrap-message"><div class="self-message"><span class="time-message">${now.getHours()}:${now.getMinutes()}</span>${data.message}</div></div>`;
+            content_messages.innerHTML += `<div class="wrap-message"><div class="self-message"><span class="time-message">${now.getHours()}:${now.getMinutes() < 10 ? '0' : ''}${now.getMinutes()}</span>${data.message}</div></div>`;
         }
         else
         {
