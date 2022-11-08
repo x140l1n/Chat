@@ -12,8 +12,9 @@
     "socket.io-client": "^2.3.0"
   },
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "dev": "nodemon index"
   },
-  "author": "Xiaolin Ji  Lin",
+  "author": "Xiaolin Jin Lin",
   "license": "ISC"
 }
